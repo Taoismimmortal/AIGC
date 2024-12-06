@@ -1,6 +1,6 @@
 from typing import Optional, Type
 from pydantic import Field
-from langchain.pydantic_v1 import BaseModel
+from pydantic import BaseModel
 from langchain_core.callbacks import (
     AsyncCallbackManagerForToolRun,
     CallbackManagerForToolRun,

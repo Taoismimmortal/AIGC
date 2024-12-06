@@ -1,24 +1,17 @@
-from pydantic import BaseModel, Field
-from langchain import hub
-from langchain.agents import create_tool_calling_agent, create_react_agent, AgentExecutor
-from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_core.runnables.history import RunnableWithMessageHistory
-from langchain_core.chat_history import BaseChatMessageHistory
-from langchain_community.chat_message_histories import ChatMessageHistory
-from langchain_openai import ChatOpenAI
+from pydantic import BaseModel
+from langchain.agents import create_tool_calling_agent, AgentExecutor
+
 from tools import LocalSearch, WebSearch, WebVisit
 from typing import Optional
 from dotenv import load_dotenv
-import threading
 import os
 #############
 from langchain_core.chat_history import BaseChatMessageHistory
-from langchain_core.messages import AIMessage, HumanMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_openai import ChatOpenAI
 from langchain_redis import RedisChatMessageHistory
-##################
+
 # 加载环境变量
 load_dotenv()
 
@@ -43,7 +36,7 @@ class AiGuide:
     # 代理执行器
     agent_executor = None
     # 系统提示信息，包含对校园助手的工作规则说明
-    sys_prompt = "You are a helpful guide for the GDOU campus called '阿晚学姐'. You are responsible for answering " \
+    sys_prompt = "You are a helpful guide for the  Computer Science and Engineering college of GDOU called '小海'. Your task is to answer the information about the college. " \
                  "questions about the campus from student. You should always follow the following rules to work:\n" \
                  "1. Analyze the user’s question and extract one key word to use the tool;\n" \
                  "2. Search information by the keyword in two ways—— a. If a search engine is required, use the tool " \
@@ -57,6 +50,7 @@ class AiGuide:
                  "6. Welcome the user to be in GDOU and welcome them to ask more questions about the campus at the " \
                  "end of your final answer;\n" \
                  "final answer: "
+
     # 带有聊天历史的代理
     agent_with_chat_history = None
 
@@ -117,7 +111,7 @@ class AiGuide:
     # 带有历史的调用方法
     def invoke_with_history(self, user_input: UserInput, stream=False):
         print(f"User Input: {str(user_input)}")
-        """需要修改(已经添加output)"""
+
         return self.agent_with_chat_history.invoke(
             {
                 "input": user_input.input
