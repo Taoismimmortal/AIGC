@@ -43,7 +43,7 @@ class LocalSearch(BaseTool):
         ]
         client = ZhipuAI(api_key=api_key)  # 填写您自己的APIKey
         response = client.chat.completions.create(
-            model="glm-4",
+            model="glm-4-flash",
             tools=tools,
             messages=[
                 {

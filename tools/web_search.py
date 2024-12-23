@@ -42,3 +42,8 @@ class WebSearch(BaseTool):
         """Use the tool asynchronously."""
         # 开销小，直接同步调用
         return self._run(keyword, run_manager=run_manager.get_sync())
+if __name__ == "__main__":
+    tool = WebSearch()
+    print(tool._run("site:gdou.edu.cn"))
+
+

@@ -27,7 +27,7 @@ def test_stream_response():
     """测试流式响应路由"""
     payload = {
         "session_id": "test_session",
-        "input": "你好，今天有什么新闻？"
+        "input": "广东海洋大学的有几个食堂,请你帮我搜索湖光食堂"
     }
     with httpx.stream("POST", f"{BASE_URL}/stream_response/", json=payload) as response:
         if response.status_code == 200:

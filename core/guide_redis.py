@@ -15,22 +15,11 @@ from langchain_redis import RedisChatMessageHistory
 # 加载环境变量
 load_dotenv()
 
-
-
-
 # 定义用户输入的数据模型
 class UserInput(BaseModel):
     session_id: str
     input: str
     output: Optional[str]
-
-
-
-
-
-
-
-
 # 定义 AiGuide 类
 class AiGuide:
     # 代理执行器
@@ -84,7 +73,8 @@ class AiGuide:
             ]
         )
         # 定义工具列表
-        tools = [WebSearch(), LocalSearch(), WebVisit()]
+        tools = [WebSearch()]
+
         # 创建工具调用代理
         agent = create_tool_calling_agent(model, tools, prompt)
         # 也可以使用另一种方式创建代理
@@ -131,6 +121,6 @@ if __name__ == "__main__":
     print("AI Response 1:", response1)
 
     response2 = aiguide.invoke_with_history(
-        UserInput(session_id="test", input="what is my name?", output="")
+        UserInput(session_id="test", input="广东海洋大学有什么学院", output="")
     )
     print("AI Response 2:", response2)
