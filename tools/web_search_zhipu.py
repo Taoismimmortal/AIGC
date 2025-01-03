@@ -67,6 +67,6 @@ if __name__ == "__main__":
     web_search_tool = WebSearch()
     tool = WebSearch()
     print(tool._run("site:gdou.edu.cn"))
-    query = "广东海洋大学有几个食堂"
+    query = "广东海洋大学什么时候放假"
     result = web_search_tool._run(query)
     print(f"Search Result: {result}")
